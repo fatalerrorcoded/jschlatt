@@ -1,27 +1,21 @@
 import { Collection, VoiceChannel } from "discord.js";
 import * as fs from "fs-extra";
-import { Duplex } from "stream";
+import * as path from "path";
 
 export default class QuoteVoice {
-	private audioFiles: Collection<string, Buffer>;
+	private sfxDir: string;
+	private audioFiles: string[];
 	constructor(sfxDir: string) {
-		const files = fs.readdirSync(sfxDir);
-		console.log(`Reading audio files in directory ${sfxDir}, ${files.length} found...`);
-		this.audioFiles = new Collection();
-		files.forEach(async (file) => {
-			const buf = await fs.readFile(file);
-			this.audioFiles.set(file, buf);
-		});
+		this.sfxDir = sfxDir;
+		this.audioFiles = fs.readdirSync(sfxDir);
 	}
 
 	public async playRandom(channel: VoiceChannel) {
-		if (channel.guild.voiceConnection !== undefined) return;
-		const stream = new Duplex();
-		stream.push(this.audioFiles.random());
-		stream.push(null);
+		if (channel.guild !== null && channel.guild.voiceConnection !== null) return;
 
+		const file = this.audioFiles[Math.floor(Math.random() * this.audioFiles.length)];
 		const connection = await channel.join();
-		const dispatcher = await connection.playStream(stream);
+		const dispatcher = await connection.playFile(path.join(this.sfxDir, file));
 		dispatcher.once("end", () => channel.leave());
 	}
 }
