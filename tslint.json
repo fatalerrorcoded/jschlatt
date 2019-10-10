@@ -6,7 +6,8 @@
     "jsRules": {},
     "rules": {
         "no-console": false,
-        "indent": [true, "tabs"]
+        "indent": [true, "tabs"],
+        "curly": [true, "as-needed"]
     },
     "rulesDirectory": []
 }

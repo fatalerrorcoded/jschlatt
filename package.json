@@ -1,12 +1,19 @@
 {
+  "main": "./dist/bot.js",
+  "scripts": {
+    "run": "node .",
+    "lint": "tslint --project ."
+  },
   "dependencies": {
     "discord.js": "^11.5.1",
     "dotenv": "^8.1.0",
+    "fs-extra": "^8.1.0",
     "node-opus": "^0.3.2",
     "tsc-watch": "^4.0.0"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
+    "@types/fs-extra": "^8.0.0",
     "@types/node": "^12.7.11",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
