@@ -1,4 +1,4 @@
-import { Collection, VoiceChannel } from "discord.js";
+import { VoiceChannel } from "discord.js";
 import * as fs from "fs-extra";
 import * as path from "path";
 

@@ -8,6 +8,7 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.1.0",
     "fs-extra": "^8.1.0",
+    "rethinkdb": "^2.3.3",
     "tsc-watch": "^4.0.0"
   },
   "devDependencies": {

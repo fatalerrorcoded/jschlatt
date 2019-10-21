@@ -2,9 +2,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import * as Discord from "discord.js";
+import QuoteChat from "./quotechat";
 import QuoteVoice from "./quotevoice";
 
 const client = new Discord.Client();
+const quotechat = new QuoteChat("./files/quotes.txt");
 const quotevoice = new QuoteVoice("./files/sfx");
 
 let presenceTimeout: number = 0;
@@ -26,8 +28,8 @@ client.on("message", (message) => {
 	if (message.author.bot) return;
 	if (message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
 		const channel = message.member.voiceChannel;
-		if (channel === undefined) message.reply("join a voice channel first");
-		quotevoice.playRandom(channel);
+		if (channel === undefined) quotechat.sendRandom(message.channel);
+		else quotevoice.playRandom(channel);
 	}
 });
 
